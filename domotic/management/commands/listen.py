@@ -35,10 +35,10 @@ class Command(BaseCommand):
         sqn, address, endpoint, cluster, number, type, size = unpack('!BHBHHHH', payload[:12])
         if type == 0x0029:  # INT16
             assert size == 0x0002
-            value = unpack('!h', self.data)[0]
+            value = unpack('!h', data)[0]
         elif type == 0x0021:  # UINT16
             assert size == 0x0002
-            value = unpack('!H', self.data)[0]
+            value = unpack('!H', data)[0]
         else:
             return
         device = Device.objects.get_or_create(
