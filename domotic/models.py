@@ -58,7 +58,7 @@ class Value(models.Model):
 
     def fmt_value(self):
         return f"{self.value * 10 ** self.attribute.exponent} {self.attribute.unit}"
-    fmt_value.verbose_name = "Valeur formatée"
+    fmt_value.short_description = "Valeur formatée"
 
     class Meta:
         verbose_name = "Valeur"
