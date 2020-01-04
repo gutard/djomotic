@@ -1,8 +1,8 @@
-from datetime import datetime
 from serial import Serial
 from struct import unpack
 
 from django.core.management.base import BaseCommand
+from django.utils.timezone import now
 
 from ...models import Device, Attribute, Value
 
@@ -56,7 +56,7 @@ class Command(BaseCommand):
         )
         if created and self.verbosity >= 1:
             self.stdout.write(f"Create attribute {attribute}")
-        timestamp = datetime.utcnow()
+        timestamp = now()
         Value.objects.create(
             attribute=attribute,
             timestamp=timestamp,
