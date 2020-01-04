@@ -56,5 +56,9 @@ class Value(models.Model):
     def __str__(self):
         return f"{self.attribute} = {self.value} @ {self.timestamp.isoformat()}"
 
+    def fmt_value(self):
+        return f"{self.value * 10 ** self.attribute.exponent} {self.attribute.unit}"
+    fmt_value.verbose_name = "Valeur formatée"
+
     class Meta:
         verbose_name = "Valeur"

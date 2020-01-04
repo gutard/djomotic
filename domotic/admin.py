@@ -17,6 +17,6 @@ class AttributeAdmin(admin.ModelAdmin):
 
 @admin.register(Value)
 class ValueAdmin(admin.ModelAdmin):
-    list_display = ('attribute', 'timestamp', 'value')
+    list_display = ('attribute', 'timestamp', 'value', 'fmt_value')
     list_filter = ('attribute', )
     date_hierarchy = 'timestamp'
