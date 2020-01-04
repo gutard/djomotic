@@ -63,7 +63,7 @@ class Command(BaseCommand):
             value=value
         )
         if self.verbosity >= 1:
-            self.stdout.write(f"Store value {value} for device {device} at {timestamp.isoformat()}")
+            self.stdout.write(f"Store value {value} for attribute {attribute} at {timestamp.isoformat()}")
 
     def handle(self, *args, **options):
         self.verbosity = options['verbosity']
