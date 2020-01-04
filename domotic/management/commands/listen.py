@@ -46,7 +46,7 @@ class Command(BaseCommand):
             address=f'{address:04x}',
             defaults={'name': f'{address:04x}'}
         )
-        if self.verbosity >= 1:
+        if created and self.verbosity >= 1:
             self.stdout.write(f"Create device {device}")
         attribute, created = Attribute.objects.get_or_create(
             device=device,
@@ -54,7 +54,7 @@ class Command(BaseCommand):
             cluster=f'{cluster:04x}',
             number=f'{number:04x}'
         )
-        if self.verbosity >= 1:
+        if created and self.verbosity >= 1:
             self.stdout.write(f"Create attribute {attribute}")
         timestamp = datetime.utcnow()
         Value.objects.create(
