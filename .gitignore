@@ -1,3 +1,5 @@
+/.vscode/
+/db.sqlite3
 /dist/
 /djomotic.egg-info/
 /env/
