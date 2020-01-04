@@ -57,7 +57,8 @@ class Value(models.Model):
         return f"{self.attribute} = {self.value} @ {self.timestamp.isoformat()}"
 
     def fmt_value(self):
-        return f"{self.value * 10 ** self.attribute.exponent} {self.attribute.unit}"
+        fmt = f"{{:0.0{max(0, -self.attribute.exponent)}f}} {self.attribute.unit}"
+        return fmt.format(self.value * 10 ** self.attribute.exponent)
     fmt_value.short_description = "Valeur formatée"
 
     class Meta:
