@@ -26,7 +26,7 @@ class Device(models.Model):
     mac = HexField(verbose_name="Adresse MAC", length=4, blank=True)
 
     def __str__(self):
-        return f"{self.name} ({self.address})"
+        return f"{self.name}"
 
     class Meta:
         verbose_name = "Appareil"
@@ -42,7 +42,7 @@ class Attribute(models.Model):
     exponent = models.IntegerField(verbose_name="Exposant", default=0)
 
     def __str__(self):
-        return f"{self.name} ({self.device.address}:{self.endpoint}:{self.cluster}:{self.number})"
+        return f"{self.name} {self.device}"
 
     class Meta:
         verbose_name = "Attribut"
@@ -52,6 +52,9 @@ class Value(models.Model):
     attribute = models.ForeignKey(Attribute, verbose_name="Attribut", on_delete=models.PROTECT)
     timestamp = models.DateTimeField(verbose_name="Horodatage")
     value = models.IntegerField(verbose_name="Valeur")
+
+    def __str__(self):
+        return f"{self.attribute} = {self.value} @ {self.timestamp.isoformat()}"
 
     class Meta:
         verbose_name = "Valeur"
