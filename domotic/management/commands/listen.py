@@ -42,16 +42,20 @@ class Command(BaseCommand):
             value = unpack('!H', payload[12:])[0]
         else:
             return
-        device = Device.objects.get_or_create(
+        device, created = Device.objects.get_or_create(
             address=f'{address:04x}',
             defaults={'name': f'{address:04x}'}
         )
-        attribute = Attribute.objects.get_or_create(
+        if self.verbosity >= 1:
+            self.stdout.write(f"Create device {device}")
+        attribute, created = Attribute.objects.get_or_create(
             device=device,
             endpoint=f'{endpoint:02x}',
             cluster=f'{cluster:04x}',
             number=f'{number:04x}'
         )
+        if self.verbosity >= 1:
+            self.stdout.write(f"Create attribute {attribute}")
         timestamp = datetime.utcnow()
         Value.objects.create(
             attribute=attribute,

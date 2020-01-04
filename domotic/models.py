@@ -25,6 +25,9 @@ class Device(models.Model):
     address = HexField(verbose_name="Adresse", length=2)
     mac = HexField(verbose_name="Adresse MAC", length=4, blank=True)
 
+    def __str__(self):
+        return f"{self.name} ({self.address})"
+
     class Meta:
         verbose_name = "Appareil"
 
@@ -37,6 +40,9 @@ class Attribute(models.Model):
     name = models.CharField(verbose_name="Nom", max_length=100, blank=True)
     unit = models.CharField(verbose_name="Unité", max_length=100, blank=True)
     exponent = models.IntegerField(verbose_name="Exposant", default=0)
+
+    def __str__(self):
+        return f"{self.name} ({self.device.address}:{self.endpoint}:{self.cluster}:{self.number})"
 
     class Meta:
         verbose_name = "Attribut"
