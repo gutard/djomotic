@@ -1,6 +1,6 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 
-from .models import Attribute
+from .models import Attribute, Device
 
 
 class AttributeListView(ListView):
@@ -14,4 +14,16 @@ class ChartView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['values'] = self.object.value_set.order_by('timestamp')
+        return context
+
+
+class TemperatureChartView(TemplateView):
+    template_name = 'domotic/temperature_chart.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['rooms'] = {
+            device.name: device.attribute_set.get(name="Température").value_set.order_by('timestamp')
+            for device in Device.objects.all()
+        }
         return context

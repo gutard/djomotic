@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
+    <head>
+        <title>Graphe</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css">
+    </head>
+    <body>
+        <canvas id="myChart" width="100%"></canvas>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+        <script>
+            var myChart = new Chart('myChart', {
+                type: 'line',
+                data: {
+                    datasets: [
+                        {% for room, values in rooms.items %}{
+                            label: '{{ room }}',
+                            fill: false,
+                            backgroundColor: '{% cycle 'rgb(54, 162, 235)' 'rgb(75, 192, 192)' 'rgb(255, 159, 64)' 'rgb(153, 102, 255)' 'rgb(255, 99, 132)' 'rgb(255, 205, 86)' %}',
+                            borderColor: '{% cycle 'rgb(54, 162, 235)' 'rgb(75, 192, 192)' 'rgb(255, 159, 64)' 'rgb(153, 102, 255)' 'rgb(255, 99, 132)' 'rgb(255, 205, 86)' %}',
+                            data: [{% for value in values %}
+                                {x: '{{ value.timestamp.isoformat }}', y: {{ value.value }}}{% if not forloop.last %}, {% endif %}{% endfor %}
+                            ]
+                        }{% if not forloop.last %},{% endif %}{% endfor %}
+                    ]
+                },
+                options: {
+                    scales: {
+                        xAxes: [{
+                            type: 'time'
+                        }]
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

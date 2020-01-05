@@ -11,5 +11,8 @@
                 <li><a href="{% url 'chart' attribute.pk %}">{{ attribute }}</a></li>
             {% endfor %}
         </ul>
+        <p>
+            <a href="{% url 'temperature_chart' %}">Températures</a>
+        </p>
     </body>
 </html>
