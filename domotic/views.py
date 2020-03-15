@@ -1,4 +1,7 @@
+from datetime import timedelta
+
 from django.views.generic import ListView, DetailView, TemplateView
+from django.utils.timezone import now
 
 from .models import Attribute, Device
 
@@ -23,7 +26,7 @@ class TemperatureChartView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['rooms'] = {
-            device.name: device.attribute_set.get(name="Température").value_set.order_by('timestamp')
+            device.name: device.attribute_set.get(name="Température").value_set.filter(timestamp__gt=now() - timedelta(days=1)).order_by('timestamp')
             for device in Device.objects.all()
         }
         return context
