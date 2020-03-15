@@ -7,9 +7,10 @@
     </head>
     <body>
         <p>
-            <form method="POST" action="{% url 'shutter_all_toggle' %}">
+            <form method="POST">
                 {% csrf_token %}
-                <button>Toggle</button>
+                <button formaction="{% url 'shutter_all_up' %}">▲ Up</button>
+                <button formaction="{% url 'shutter_all_down' %}">▼ Down</button>
             </form>
         </p>
         <ul>

@@ -78,4 +78,4 @@ class ShutterMove(RedirectView):
             serial.write(bytes(encoded))
 
         # Redirect
-        return super().post()
+        return super().post(request)
