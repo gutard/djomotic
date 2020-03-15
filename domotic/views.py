@@ -76,3 +76,6 @@ class ShutterMove(RedirectView):
         # Send packet
         with Serial(port='/dev/ttyS0', baudrate=115200, timeout=5) as serial:
             serial.write(bytes(encoded))
+
+        # Redirect
+        return super().post()
