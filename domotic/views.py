@@ -35,14 +35,16 @@ class TemperatureChartView(TemplateView):
 
 
 class ShutterMove(RedirectView):
-    DOWN = 0x00
-    UP = 0x01
-    TOGGLE = 0x02
-
     url = '/'
 
-    def post(self, request, target=0x01, cmd=TOGGLE, group=True):
+    def post(self, request, target=0x01, direction='toggle', group=True):
         CODE = 0x0092
+
+        cmd = {
+            'down': 0x00,
+            'up': 0x01,
+            'toggle': 0x02,
+        }[direction]
 
         # Paylod
         mode = 0x01 if group else 0x02  # 0=bound 1=group 2=short 3=ieee
