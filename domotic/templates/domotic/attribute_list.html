@@ -13,8 +13,8 @@
             <p>
                 <form method="POST">
                     {% csrf_token %}
-                    <button type="button" class="btn btn-success" formaction="{% url 'shutter_all' 'up' %}">▲</button>
-                    <button type="button" class="btn btn-danger" formaction="{% url 'shutter_all' 'down' %}">▼</button>
+                    <button class="btn btn-success" formaction="{% url 'shutter_all' 'up' %}">▲</button>
+                    <button class="btn btn-danger" formaction="{% url 'shutter_all' 'down' %}">▼</button>
                 </form>
             </p>
             <ul>
