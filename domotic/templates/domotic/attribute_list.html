@@ -9,20 +9,22 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </head>
     <body>
-        <p>
-            <form method="POST">
-                {% csrf_token %}
-                <button type="button" class="btn btn-success" formaction="{% url 'shutter_all' 'up' %}">▲</button>
-                <button type="button" class="btn btn-danger" formaction="{% url 'shutter_all' 'down' %}">▼</button>
-            </form>
-        </p>
-        <ul>
-            {% for attribute in attribute_list %}        
-                <li><a href="{% url 'chart' attribute.pk %}">{{ attribute }}</a></li>
-            {% endfor %}
-        </ul>
-        <p>
-            <a href="{% url 'temperature_chart' %}">Températures</a>
-        </p>
+        <div class="container">
+            <p>
+                <form method="POST">
+                    {% csrf_token %}
+                    <button type="button" class="btn btn-success" formaction="{% url 'shutter_all' 'up' %}">▲</button>
+                    <button type="button" class="btn btn-danger" formaction="{% url 'shutter_all' 'down' %}">▼</button>
+                </form>
+            </p>
+            <ul>
+                {% for attribute in attribute_list %}
+                    <li><a href="{% url 'chart' attribute.pk %}">{{ attribute }}</a></li>
+                {% endfor %}
+            </ul>
+            <p>
+                <a href="{% url 'temperature_chart' %}">Températures</a>
+            </p>
+        </div>
     </body>
 </html>
