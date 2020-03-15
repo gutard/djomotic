@@ -6,6 +6,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css">
     </head>
     <body>
+        <p>
+            <form method="POST" action="{% url 'shutter_all_toggle' %}">
+                {% csrf_token %}
+                <button>Toggle</button>
+            </form>
+        </p>
         <ul>
             {% for attribute in attribute_list %}        
                 <li><a href="{% url 'chart' attribute.pk %}">{{ attribute }}</a></li>
