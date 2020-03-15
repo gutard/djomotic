@@ -41,14 +41,14 @@ class ShutterMove(RedirectView):
 
     url = '/'
 
-    def post(self, target=0x01, cmd=TOGGLE, group=True):
+    def post(self, addr=0x01, cmd=TOGGLE, group=True):
         CODE = 0x0092
 
         # Paylod
-        self.mode = 0x01 if group else 0x02  # 0=bound 1=group 2=short 3=ieee
+        mode = 0x01 if group else 0x02  # 0=bound 1=group 2=short 3=ieee
         src = 0x01
         dst = 0x01
-        payload = pack('!BHBBB', self.mode, target, src, dst, cmd)
+        payload = pack('!BHBBB', mode, addr, src, dst, cmd)
 
         # Length
         length = len(payload).to_bytes(2, 'big')
@@ -57,7 +57,7 @@ class ShutterMove(RedirectView):
         code = CODE.to_bytes(2, 'big')
         checksum = code[0] ^ code[1]
         checksum ^= length[0] ^ length[1]
-        for byte in self.payload:
+        for byte in payload:
             checksum ^= byte
         checksum = bytes([checksum])
 
