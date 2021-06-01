@@ -8,7 +8,7 @@ Restart=always
 User=pi
 Group=pi
 WorkingDirectory=/home/pi/djomotic
-ExecStart=env/bin/python manage.py listen
+ExecStart=./env/bin/python manage.py listen
 
 [Install]
 WantedBy=multi-user.target
